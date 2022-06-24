@@ -1,13 +1,12 @@
 const bcrypt = require('bcryptjs');
 
 class HashGenerator {
-  constructor(saltNumber, password) {
-    this.saltNumber = saltNumber;
+  constructor(password) {
     this.password = password;
   }
 
   passwordToHash() {
-    const salt = bcrypt.genSaltSync(this.saltNumber);
+    const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(this.password, salt);
     return hash;
   }
