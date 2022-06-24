@@ -20,18 +20,12 @@ describe('/api/user', () => {
 
   before(async () => {
     sinon
-      .stub(User, 'findOne')
-      .resolves({
-        id: 1,
-        username: 'developer',
-        email: 'dev.emailtest404@gmail.com',
-        password: 'abc123ABC',
-        verified: true,
-      });
+      .stub(User, 'create')
+      .resolves([{ insertId: 1 }]);
   });
 
   after(async () => {
-    User.findOne.restore();
+    User.create.restore();
   });
 
   it('success when trying to create a new user', async () => {
