@@ -5,17 +5,18 @@ const User = require('../models/User');
 class UsersService {
   async create(userData) {
     const { username, email, password } = userData;
-    const user = this.getByEmail(email);
+    const user = await this.getByEmail(email);
     if (!user) {
-      const generator = new HashGenerator(password, 10);
+      const generator = new HashGenerator(password);
       const hash = generator.passwordToHash();
-      const [{ insertId }] = await User.create({
+
+      const result = await User.create({
         username,
-        password: hash,
         email,
+        password: hash,
       });
       return {
-        id: insertId,
+        id: result.id,
         username,
         email,
       };
