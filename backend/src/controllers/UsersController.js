@@ -31,12 +31,13 @@ class UsersController {
     try {
       const { id } = req.params;
       const user = await UsersService.getById(+id);
-      delete user.password;
       if (user) {
+        user.password = '';
         return res.status(200).json(user);
       }
       return res.status(404).json({ message: 'user not found' });
     } catch (e) {
+      console.log(e);
       return res.status(500).json({ message: 'internal error' });
     }
   }
