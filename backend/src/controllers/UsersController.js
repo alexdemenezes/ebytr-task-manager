@@ -37,7 +37,6 @@ class UsersController {
       }
       return res.status(404).json({ message: 'user not found' });
     } catch (e) {
-      console.log(e);
       return res.status(500).json({ message: 'internal error' });
     }
   }
