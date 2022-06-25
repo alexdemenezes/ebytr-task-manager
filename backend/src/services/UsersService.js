@@ -29,7 +29,7 @@ class UsersService {
   async login(emailLogin, password) {
     const user = await this.getByEmail(emailLogin);
     if (user && compareSync(password, user.password)) {
-      const token = JwtGenerator.generateToken(emailLogin, password);
+      const token = await JwtGenerator.generateToken(emailLogin, password);
       const { id, username, email } = user;
       return {
         user: {
