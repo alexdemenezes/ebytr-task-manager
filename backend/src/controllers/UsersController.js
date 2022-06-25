@@ -40,5 +40,38 @@ class UsersController {
       return res.status(500).json({ message: 'internal error' });
     }
   }
+
+  async updateUsername(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { username } = req.body;
+      await UsersService.updateUsername(username, email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async updateEmail(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { email: newEmail } = req.body;
+      await UsersService.updateEmail(newEmail, email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async updatePassword(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { password } = req.body;
+      await UsersService.updatePassword(password, email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
 }
 module.exports = new UsersController();
