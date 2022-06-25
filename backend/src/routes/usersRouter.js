@@ -1,10 +1,15 @@
 const express = require('express');
 const UsersController = require('../controllers/UsersController');
 const UsersMiddleware = require('../middlewares/UsersMiddleware');
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => UsersController.getById(req, res));
+router.get(
+  '/:id',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res) => UsersController.getById(req, res),
+);
 
 router.post(
   '/',
