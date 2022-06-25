@@ -1,5 +1,7 @@
 /* eslint-disable class-methods-use-this */
+const { compareSync } = require('bcryptjs');
 const HashGenerator = require('../utils/HashGenerator');
+const JwtGenerator = require('../utils/JwtGenerator');
 const User = require('../models/User');
 
 class UsersService {
@@ -19,6 +21,23 @@ class UsersService {
         id: result.id,
         username,
         email,
+      };
+    }
+    return null;
+  }
+
+  async login(emailLogin, password) {
+    const user = await this.getByEmail(emailLogin);
+    if (user && compareSync(password, user.password)) {
+      const token = JwtGenerator.generateToken(emailLogin, password);
+      const { id, username, email } = user;
+      return {
+        user: {
+          id,
+          username,
+          email,
+        },
+        token,
       };
     }
     return null;
