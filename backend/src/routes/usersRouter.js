@@ -4,6 +4,8 @@ const UsersMiddleware = require('../middlewares/UsersMiddleware');
 
 const router = express.Router();
 
+router.get('/:id', (req, res) => UsersController.getById(req, res));
+
 router.post(
   '/',
   (req, res, next) => UsersMiddleware.verifyUsername(req, res, next),
