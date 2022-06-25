@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { before, after } = require('mocha');
-const App = require('../app');
-const User = require('../models/User');
+const App = require('../../app');
+const User = require('../../models/User');
 
 chai.use(chaiHttp);
 
@@ -36,7 +36,7 @@ describe('POST /api/users', () => {
       User.findOne.restore();
     });
 
-    it('success when trying to create a new account', async () => {
+    it('create a new account', async () => {
       const { username, email } = newUser;
       chaiHttpResponse = await chai
         .request(App.app)
@@ -54,7 +54,7 @@ describe('POST /api/users', () => {
   });
 
   describe('- Invalid fields', () => {
-    it('fails when user is trying to create a new account without username filled.', async () => {
+    it('username not filled.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -68,7 +68,7 @@ describe('POST /api/users', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
 
-    it('fails when user is trying to create a new account with a username that is not big enough.', async () => {
+    it('username not big enough.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -83,7 +83,7 @@ describe('POST /api/users', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message: '"username" length must be equal or greater than 6' });
     });
 
-    it('fails when user is trying to create a new account without email filled.', async () => {
+    it('email not filled.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -97,7 +97,7 @@ describe('POST /api/users', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
 
-    it('fails when user is trying to create a new account with a invalid email address.', async () => {
+    it('invalid email address.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -112,7 +112,7 @@ describe('POST /api/users', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'Please provide a valid email adress' });
     });
 
-    it('fails when user is  trying to create a new account without password filled.', async () => {
+    it('password not filled.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -126,7 +126,7 @@ describe('POST /api/users', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
 
-    it('fails when user is  trying to create a new account with a password that is not big enough.', async () => {
+    it('password not big enough.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
@@ -160,7 +160,7 @@ describe('POST /api/users', () => {
       User.findOne.restore();
     });
 
-    it('fails if user is trying  to create an account with an email taht already used.', async () => {
+    it('fails if user is trying  to create an account with an email already used.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')

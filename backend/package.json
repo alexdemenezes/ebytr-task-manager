@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./src/tests/*$NAME.spec.js -t 10000 --exit",
+    "test": "mocha ./src/tests/**/*.spec.js -t 10000 --exit",
+    "test:user": " mocha ./src/tests/users/*.spec.js -t 10000 --exit",
     "test:coverage": "nyc npm run test"
   },
   "keywords": [],
