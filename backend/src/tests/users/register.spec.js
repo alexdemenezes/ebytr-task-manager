@@ -160,7 +160,7 @@ describe('POST /api/users', () => {
       User.findOne.restore();
     });
 
-    it('fails if user is trying  to create an account with an email taht already used.', async () => {
+    it('fails if user is trying  to create an account with an email already used.', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
         .post('/api/users')
