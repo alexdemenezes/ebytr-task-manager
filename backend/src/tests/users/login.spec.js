@@ -154,4 +154,28 @@ describe('POST /api/login', () => {
       expect(chaiHttpResponse.body.message).to.deep.equal('Incorrect email or password');
     });
   });
+
+  describe('- Internal error.', () => {
+    let chaiHttpResponse;
+    const error = new Error('something went wrong...');
+    before(async () => {
+      sinon
+        .stub(User, 'findOne')
+        .throws(error);
+    });
+    after(async () => {
+      User.findOne.restore();
+    });
+
+    it('unexpected problem event.', async () => {
+      chaiHttpResponse = await chai
+        .request(App.app)
+        .post('/api/login')
+        .send(credentials);
+
+      expect(chaiHttpResponse.status).to.be.equal(500);
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'internal error' });
+    });
+  });
 });
