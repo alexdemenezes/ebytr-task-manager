@@ -32,6 +32,15 @@ class UsersService {
     });
     return user;
   }
+
+  async getById(id) {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    return user;
+  }
 }
 
 module.exports = new UsersService();

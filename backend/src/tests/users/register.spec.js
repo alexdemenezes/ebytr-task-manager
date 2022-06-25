@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { before, after } = require('mocha');
-const App = require('../app');
-const User = require('../models/User');
+const App = require('../../app');
+const User = require('../../models/User');
 
 chai.use(chaiHttp);
 
