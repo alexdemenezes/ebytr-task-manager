@@ -26,5 +26,19 @@ class UsersController {
       return res.status(500).json({ message: 'internal error' });
     }
   }
+
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await UsersService.getById(+id);
+      delete user.password;
+      if (user) {
+        return res.status(200).json(user);
+      }
+      return res.status(404).json({ message: 'user not found' });
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
 }
 module.exports = new UsersController();
