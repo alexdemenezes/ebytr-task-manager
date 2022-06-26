@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const { compareSync } = require('bcryptjs');
 const HashGenerator = require('../utils/HashGenerator');
 const JwtGenerator = require('../utils/JwtGenerator');

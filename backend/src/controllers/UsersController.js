@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const UsersService = require('../services/UsersService');
 
 class UsersController {
