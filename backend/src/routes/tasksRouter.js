@@ -5,6 +5,12 @@ const AuthMiddleware = require('../middlewares/AuthMiddleware');
 
 const router = express.Router();
 
+router.get(
+  '/',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res) => TasksController.getAll(req, res),
+);
+
 router.post(
   '/',
   (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
