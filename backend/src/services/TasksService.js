@@ -20,6 +20,16 @@ class TasksService {
       userId: user.id,
     };
   }
+
+  async getAll(email) {
+    const user = await UsersService.getByEmail(email);
+    const tasks = await Task.findAll({
+      where: {
+        userId: user.id,
+      },
+    });
+    return tasks;
+  }
 }
 
 module.exports = new TasksService();
