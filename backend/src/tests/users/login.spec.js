@@ -81,7 +81,7 @@ describe('POST /api/login', () => {
           password: credentials.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
@@ -95,7 +95,7 @@ describe('POST /api/login', () => {
           password: credentials.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'Please provide a valid email adress' });
     });
@@ -108,7 +108,7 @@ describe('POST /api/login', () => {
           email: credentials.email,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
@@ -122,7 +122,7 @@ describe('POST /api/login', () => {
           password: '1234',
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: '"password" length must be equal or greater than 8' });
     });
@@ -149,7 +149,7 @@ describe('POST /api/login', () => {
         .post('/api/login')
         .send(wrongCredentials);
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body.message).to.deep.equal('Incorrect email or password');
     });

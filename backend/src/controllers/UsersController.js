@@ -21,7 +21,54 @@ class UsersController {
       if (loginData) {
         return res.status(200).json(loginData);
       }
-      return res.status(401).json({ message: 'Incorrect email or password' });
+      return res.status(400).json({ message: 'Incorrect email or password' });
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await UsersService.getById(+id);
+      if (user) {
+        user.password = '';
+        return res.status(200).json(user);
+      }
+      return res.status(404).json({ message: 'user not found' });
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async updateUsername(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { username } = req.body;
+      await UsersService.updateUsername(username, email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async updateEmail(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { email: newEmail } = req.body;
+      await UsersService.updateEmail(newEmail, email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
+
+  async updatePassword(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      const { password } = req.body;
+      await UsersService.updatePassword(password, email);
+      return res.status(200).end();
     } catch (e) {
       return res.status(500).json({ message: 'internal error' });
     }

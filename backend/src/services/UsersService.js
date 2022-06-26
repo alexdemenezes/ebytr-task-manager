@@ -60,6 +60,38 @@ class UsersService {
     });
     return user;
   }
+
+  async updateUsername(newUsername, email) {
+    await User.update({
+      username: newUsername,
+    }, {
+      where: {
+        email,
+      },
+    });
+  }
+
+  async updateEmail(newEmail, email) {
+    await User.update({
+      email: newEmail,
+    }, {
+      where: {
+        email,
+      },
+    });
+  }
+
+  async updatePassword(newPassword, email) {
+    const generator = new HashGenerator(newPassword);
+    const hash = generator.passwordToHash();
+    await User.update({
+      password: hash,
+    }, {
+      where: {
+        email,
+      },
+    });
+  }
 }
 
 module.exports = new UsersService();
