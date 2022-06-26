@@ -47,7 +47,7 @@ describe('PATCH /api/users', () => {
       });
     });
 
-    describe('- Unauthorized', () => {
+    describe('- Unauthorized.', () => {
       let chaiHttpResponse;
       const error = new Error('something went wrong');
 
@@ -82,7 +82,7 @@ describe('PATCH /api/users', () => {
       });
     });
 
-    describe('- Invalid fields', () => {
+    describe('- Invalid fields.', () => {
       before(() => {
         sinon
           .stub(jwt, 'verify')
