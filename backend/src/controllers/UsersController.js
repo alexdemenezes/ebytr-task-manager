@@ -21,7 +21,7 @@ class UsersController {
       if (loginData) {
         return res.status(200).json(loginData);
       }
-      return res.status(401).json({ message: 'Incorrect email or password' });
+      return res.status(400).json({ message: 'Incorrect email or password' });
     } catch (e) {
       return res.status(500).json({ message: 'internal error' });
     }
