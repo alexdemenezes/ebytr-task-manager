@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { usersRouter, loginRouter } = require('./routes');
+const { usersRouter, loginRouter, tasksRouter } = require('./routes');
 
 class App {
   constructor() {
@@ -13,6 +13,7 @@ class App {
     this.app.use(cors());
     this.app.use('/api/users', usersRouter);
     this.app.use('/api/login', loginRouter);
+    this.app.use('/api/tasks', tasksRouter);
   }
 
   start(PORT) {
