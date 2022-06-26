@@ -73,5 +73,15 @@ class UsersController {
       return res.status(500).json({ message: 'internal error' });
     }
   }
+
+  async deleteUser(req, res) {
+    try {
+      const { email } = req.body.decoded;
+      await UsersService.deleteUser(email);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
 }
 module.exports = new UsersController();

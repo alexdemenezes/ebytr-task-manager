@@ -92,6 +92,14 @@ class UsersService {
       },
     });
   }
+
+  async deleteUser(email) {
+    await User.destroy({
+      where: {
+        email,
+      },
+    });
+  }
 }
 
 module.exports = new UsersService();

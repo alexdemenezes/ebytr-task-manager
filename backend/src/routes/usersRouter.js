@@ -40,4 +40,10 @@ router.post(
   (req, res) => UsersController.create(req, res),
 );
 
+router.delete(
+  '/',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res) => UsersController.deleteUser(req, res),
+);
+
 module.exports = router;
