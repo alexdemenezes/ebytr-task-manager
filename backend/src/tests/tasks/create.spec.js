@@ -101,6 +101,47 @@ describe('POST /api/tasks', () => {
     });
   });
 
+  describe('- Invalid fields', () => {
+    before(() => {
+      sinon
+        .stub(jwt, 'verify')
+        .returns(tokenData);
+    });
+
+    after(() => {
+      jwt.verify.restore();
+    });
+
+    let chaiHttpResponse;
+    it('title not filled', async () => {
+      chaiHttpResponse = await chai
+        .request(App.app)
+        .post('/api/tasks')
+        .set('authorization', token)
+        .send({
+          description: 'test',
+          status: 'pendente',
+        });
+
+      expect(chaiHttpResponse.status).to.be.equal(400);
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'title field must be filled' });
+    });
+
+    it('status not filled', async () => {
+      chaiHttpResponse = await chai
+        .request(App.app)
+        .post('/api/tasks')
+        .set('authorization', token)
+        .send({
+          title: 'test',
+          description: '',
+        });
+
+      expect(chaiHttpResponse.status).to.be.equal(400);
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'status field must be filled' });
+    });
+  });
+
   describe('- Internal error.', () => {
     let chaiHttpResponse;
     const error = new Error('something went wrong...');
