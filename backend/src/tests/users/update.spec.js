@@ -15,7 +15,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRl
 
 describe('PATCH /api/users', () => {
   describe('update /username', () => {
-    describe('- Sucess.', () => {
+    describe('- Success.', () => {
       let chaiHttpResponse;
 
       before(() => {
@@ -44,6 +44,41 @@ describe('PATCH /api/users', () => {
           .send({ username: 'developer1' });
 
         expect(chaiHttpResponse.status).to.be.equal(200);
+      });
+    });
+
+    describe('- Unauthorized', () => {
+      let chaiHttpResponse;
+      const error = new Error('something went wrong');
+
+      before(() => {
+        sinon
+          .stub(jwt, 'verify')
+          .throws(error);
+      });
+
+      after(() => {
+        jwt.verify.restore();
+      });
+      it('token not sent', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/username')
+          .send({ username: 'developer1' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Authorization token is required' });
+      });
+
+      it('token invalid or expired', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/username')
+          .set('authorization', token)
+          .send({ username: 'developer1' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token is invalid or expired' });
       });
     });
 
@@ -121,7 +156,7 @@ describe('PATCH /api/users', () => {
   });
 
   describe('update /email', () => {
-    describe('- Sucess.', () => {
+    describe('- Success.', () => {
       let chaiHttpResponse;
 
       before(() => {
@@ -150,6 +185,41 @@ describe('PATCH /api/users', () => {
           .send({ email: 'dev@gmail.com' });
 
         expect(chaiHttpResponse.status).to.be.equal(200);
+      });
+    });
+
+    describe('- Unauthorized', () => {
+      let chaiHttpResponse;
+      const error = new Error('something went wrong');
+
+      before(() => {
+        sinon
+          .stub(jwt, 'verify')
+          .throws(error);
+      });
+
+      after(() => {
+        jwt.verify.restore();
+      });
+      it('token not sent', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/email')
+          .send({ email: 'dev@gmail.com' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Authorization token is required' });
+      });
+
+      it('token invalid or expired', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/email')
+          .set('authorization', token)
+          .send({ email: 'dev@gmail.com' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token is invalid or expired' });
       });
     });
 
@@ -227,7 +297,7 @@ describe('PATCH /api/users', () => {
   });
 
   describe('update /password', () => {
-    describe('- Sucess.', () => {
+    describe('- Success.', () => {
       let chaiHttpResponse;
 
       before(() => {
@@ -256,6 +326,41 @@ describe('PATCH /api/users', () => {
           .send({ password: '12345678' });
 
         expect(chaiHttpResponse.status).to.be.equal(200);
+      });
+    });
+
+    describe('- Unauthorized', () => {
+      let chaiHttpResponse;
+      const error = new Error('something went wrong');
+
+      before(() => {
+        sinon
+          .stub(jwt, 'verify')
+          .throws(error);
+      });
+
+      after(() => {
+        jwt.verify.restore();
+      });
+      it('token not sent', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/password')
+          .send({ password: '12345678' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Authorization token is required' });
+      });
+
+      it('token invalid or expired', async () => {
+        chaiHttpResponse = await chai
+          .request(App.app)
+          .patch('/api/users/password')
+          .set('authorization', token)
+          .send({ password: '12345678' });
+
+        expect(chaiHttpResponse.status).to.be.equal(401);
+        expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token is invalid or expired' });
       });
     });
 
