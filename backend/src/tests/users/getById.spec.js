@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { before, after } = require('mocha');
+const jwt = require('jsonwebtoken');
 const App = require('../../app');
 const User = require('../../models/User');
 
@@ -34,10 +35,18 @@ describe('GET /api/users/:id', () => {
       sinon
         .stub(User, 'findOne')
         .resolves(userDb);
+
+      sinon
+        .stub(jwt, 'verify')
+        .resolves({
+          email: 'dev.emailtest404@gmail.com',
+          password: "'abc123ABC'",
+        });
     });
 
     after(() => {
       User.findOne.restore();
+      jwt.verify.restore();
     });
 
     it('find user by id', async () => {
@@ -58,10 +67,18 @@ describe('GET /api/users/:id', () => {
       sinon
         .stub(User, 'findOne')
         .resolves(null);
+
+      sinon
+        .stub(jwt, 'verify')
+        .resolves({
+          email: 'dev.emailtest404@gmail.com',
+          password: "'abc123ABC'",
+        });
     });
 
     after(() => {
       User.findOne.restore();
+      jwt.verify.restore();
     });
 
     it('cannot find the user by the given id', async () => {
@@ -82,9 +99,17 @@ describe('GET /api/users/:id', () => {
       sinon
         .stub(User, 'findOne')
         .throws(error);
+
+      sinon
+        .stub(jwt, 'verify')
+        .resolves({
+          email: 'dev.emailtest404@gmail.com',
+          password: "'abc123ABC'",
+        });
     });
     after(async () => {
       User.findOne.restore();
+      jwt.verify.restore();
     });
 
     it('unexpected problem event.', async () => {
