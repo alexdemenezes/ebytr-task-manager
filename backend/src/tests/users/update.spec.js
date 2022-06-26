@@ -25,7 +25,7 @@ describe('PATCH /api/users', () => {
 
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -86,7 +86,7 @@ describe('PATCH /api/users', () => {
       before(() => {
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -131,7 +131,7 @@ describe('PATCH /api/users', () => {
 
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -166,7 +166,7 @@ describe('PATCH /api/users', () => {
 
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -227,7 +227,7 @@ describe('PATCH /api/users', () => {
       before(() => {
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -272,7 +272,7 @@ describe('PATCH /api/users', () => {
 
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -303,7 +303,7 @@ describe('PATCH /api/users', () => {
       before(() => {
         sinon
           .stub(User, 'update')
-          .resolves({ status: true });
+          .returns({ status: true });
 
         sinon
           .stub(jwt, 'verify')
@@ -368,7 +368,7 @@ describe('PATCH /api/users', () => {
       before(() => {
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });
@@ -413,7 +413,7 @@ describe('PATCH /api/users', () => {
 
         sinon
           .stub(jwt, 'verify')
-          .resolves({
+          .returns({
             email: 'dev.emailtest404@gmail.com',
             password: "'abc123ABC'",
           });

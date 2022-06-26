@@ -38,7 +38,7 @@ describe('GET /api/users/:id', () => {
 
       sinon
         .stub(jwt, 'verify')
-        .resolves({
+        .returns({
           email: 'dev.emailtest404@gmail.com',
           password: "'abc123ABC'",
         });
@@ -70,7 +70,7 @@ describe('GET /api/users/:id', () => {
 
       sinon
         .stub(jwt, 'verify')
-        .resolves({
+        .returns({
           email: 'dev.emailtest404@gmail.com',
           password: "'abc123ABC'",
         });
@@ -102,7 +102,7 @@ describe('GET /api/users/:id', () => {
 
       sinon
         .stub(jwt, 'verify')
-        .resolves({
+        .returns({
           email: 'dev.emailtest404@gmail.com',
           password: "'abc123ABC'",
         });
