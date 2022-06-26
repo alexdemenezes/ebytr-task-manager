@@ -63,7 +63,7 @@ describe('POST /api/users', () => {
           password: newUser.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
@@ -78,7 +78,7 @@ describe('POST /api/users', () => {
           password: newUser.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: '"username" length must be equal or greater than 6' });
     });
@@ -92,7 +92,7 @@ describe('POST /api/users', () => {
           password: newUser.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
@@ -107,7 +107,7 @@ describe('POST /api/users', () => {
           password: newUser.password,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'Please provide a valid email adress' });
     });
@@ -121,7 +121,7 @@ describe('POST /api/users', () => {
           email: newUser.email,
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
     });
@@ -136,7 +136,7 @@ describe('POST /api/users', () => {
           password: '1234',
         });
 
-      expect(chaiHttpResponse.status).to.be.equal(401);
+      expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body).to.deep.equal({ message: '"password" length must be equal or greater than 8' });
     });
