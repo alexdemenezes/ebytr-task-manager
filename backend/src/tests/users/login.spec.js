@@ -51,7 +51,7 @@ describe('POST /api/login', () => {
 
       sinon
         .stub(jwt, 'sign')
-        .resolves(token);
+        .returns(token);
     });
 
     after(() => {
@@ -136,7 +136,7 @@ describe('POST /api/login', () => {
 
       sinon
         .stub(bcrypt, 'compareSync')
-        .resolves(false);
+        .returns(false);
     });
 
     after(() => {

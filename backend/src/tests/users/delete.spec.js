@@ -24,7 +24,7 @@ describe('DELETE /api/users', () => {
 
       sinon
         .stub(jwt, 'verify')
-        .resolves({
+        .returns({
           email: 'dev.emailtest404@gmail.com',
           password: "'abc123ABC'",
         });
@@ -89,7 +89,7 @@ describe('DELETE /api/users', () => {
 
       sinon
         .stub(jwt, 'verify')
-        .resolves({
+        .returns({
           email: 'dev.emailtest404@gmail.com',
           password: '12345678',
         });
