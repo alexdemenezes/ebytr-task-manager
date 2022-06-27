@@ -72,8 +72,7 @@ describe('POST /api/tasks/update', () => {
     it('token not sent', async () => {
       chaiHttpResponse = await chai
         .request(App.app)
-        .post('/api/tasks/update')
-        .send(token);
+        .post('/api/tasks/update');
 
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'Authorization token is required' });
@@ -88,6 +87,38 @@ describe('POST /api/tasks/update', () => {
 
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token is invalid or expired' });
+    });
+  });
+
+  describe('- Internal error.', () => {
+    let chaiHttpResponse;
+    const error = new Error('something went wrong');
+
+    before(() => {
+      sinon
+        .stub(Task, 'update')
+        .throws(error);
+
+      sinon
+        .stub(jwt, 'verify')
+        .returns(tokenData);
+    });
+
+    after(() => {
+      Task.update.restore();
+      jwt.verify.restore();
+    });
+
+    it(' unexpected problem event', async () => {
+      chaiHttpResponse = await chai
+        .request(App.app)
+        .post('/api/tasks/update')
+        .set('authorization', token)
+        .send(task);
+
+      expect(chaiHttpResponse.status).to.be.equal(500);
+      expect(chaiHttpResponse.body).to.have.property('message');
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'internal error' });
     });
   });
 });
