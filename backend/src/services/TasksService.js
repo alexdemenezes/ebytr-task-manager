@@ -30,6 +30,15 @@ class TasksService {
     });
     return tasks;
   }
+
+  async getById(id) {
+    const task = await Task.findOne({
+      where: {
+        id,
+      },
+    });
+    return task;
+  }
 }
 
 module.exports = new TasksService();
