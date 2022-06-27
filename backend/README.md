@@ -6,7 +6,7 @@ API desenvolvida para  uma aplicação que gerencia tarefas. Contém um CRUD com
 Tabela de conteúdos
 =================
 <!--ts-->
-   * [Instalação](#instalacao)
+   * [Instalação](#installation)
    * [Configuração local](##Configuração-local)
    * [Como usar](#como-usar)
    * [Endpoints](#endpoints)
@@ -24,7 +24,7 @@ Tabela de conteúdos
    * [Tecnologias](#tecnologias)
 <!--te-->
 
-Instalação
+Installation
 =================
 
 Clone o repositório do projeto na sua máquina rodando o seguinte comando:
