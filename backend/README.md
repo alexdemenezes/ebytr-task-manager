@@ -6,7 +6,7 @@ API desenvolvida para  uma aplicação que gerencia tarefas. Contém um CRUD com
 Tabela de conteúdos
 =================
 <!--ts-->
-   * [Instalação](##instalacao)
+   * [Instalação](#instalacao)
    * [Configuração local](##Configuração-local)
    * [Como usar](#como-usar)
    * [Endpoints](#endpoints)
