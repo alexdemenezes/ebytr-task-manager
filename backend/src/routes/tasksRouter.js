@@ -25,4 +25,12 @@ router.post(
   (req, res) => TasksController.create(req, res),
 );
 
+router.post(
+  '/update',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res, next) => TasksMiddleware.verfifyTitle(req, res, next),
+  (req, res, next) => TasksMiddleware.verifyStatus(req, res, next),
+  (req, res) => TasksController.update(req, res),
+);
+
 module.exports = router;

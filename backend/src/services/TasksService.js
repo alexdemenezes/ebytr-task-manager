@@ -39,6 +39,17 @@ class TasksService {
     });
     return task;
   }
+
+  async update(task) {
+    const {
+      id, title, description, status,
+    } = task;
+    await Task.update({ title, description, status }, {
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 module.exports = new TasksService();

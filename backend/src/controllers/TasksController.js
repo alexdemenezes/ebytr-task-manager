@@ -35,6 +35,20 @@ class TasksController {
       return res.status(500).json({ message: 'internal error' });
     }
   }
+
+  async update(req, res) {
+    try {
+      const {
+        id, title, description, status,
+      } = req.body;
+      await TasksService.update({
+        id, title, description, status,
+      });
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
 }
 
 module.exports = new TasksController();
