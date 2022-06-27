@@ -11,6 +11,12 @@ router.get(
   (req, res) => TasksController.getAll(req, res),
 );
 
+router.get(
+  '/:id',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res) => TasksController.getById(req, res),
+);
+
 router.post(
   '/',
   (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
