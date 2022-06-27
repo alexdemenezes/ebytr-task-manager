@@ -33,4 +33,10 @@ router.post(
   (req, res) => TasksController.update(req, res),
 );
 
+router.delete(
+  '/:id',
+  (req, res, next) => AuthMiddleware.verifyToken(req, res, next),
+  (req, res) => TasksController.delete(req, res),
+);
+
 module.exports = router;
