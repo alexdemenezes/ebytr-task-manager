@@ -24,7 +24,7 @@ Tabela de conteúdos
    * [Tecnologias](#tecnologias)
 <!--te-->
 
-Installation
+Instalação
 =================
 
 Clone o repositório do projeto na sua máquina rodando o seguinte comando:
