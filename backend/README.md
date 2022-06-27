@@ -25,6 +25,7 @@ Tabela de conteúdos
 <!--te-->
 
 Instalação
+=================
 
 Clone o repositório do projeto na sua máquina rodando o seguinte comando:
 ```
