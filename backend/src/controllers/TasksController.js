@@ -49,6 +49,16 @@ class TasksController {
       return res.status(500).json({ message: 'internal error' });
     }
   }
+
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      await TasksService.delete(+id);
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(500).json({ message: 'internal error' });
+    }
+  }
 }
 
 module.exports = new TasksController();

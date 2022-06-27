@@ -50,6 +50,14 @@ class TasksService {
       },
     });
   }
+
+  async delete(id) {
+    await Task.destroy({
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 module.exports = new TasksService();
