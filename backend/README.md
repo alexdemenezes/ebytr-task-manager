@@ -24,7 +24,8 @@ Tabela de conteúdos
    * [Tecnologias](#tecnologias)
 <!--te-->
 
-## Instalação
+Instalação
+
 Clone o repositório do projeto na sua máquina rodando o seguinte comando:
 ```
 git clone git@github.com:alexdemenezes/project-task-manager.git
