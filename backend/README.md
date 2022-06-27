@@ -7,7 +7,7 @@ Tabela de conteúdos
 =================
 <!--ts-->
    * [Instalação](#installation)
-   * [Configuração local](##Configuração-local)
+   * [Configuração local](#local-files-config)
    * [Como usar](#como-usar)
    * [Endpoints](#endpoints)
       * [users](#users)
@@ -24,7 +24,7 @@ Tabela de conteúdos
    * [Tecnologias](#tecnologias)
 <!--te-->
 
-Instalação
+Installation
 =================
 
 Clone o repositório do projeto na sua máquina rodando o seguinte comando:
@@ -40,7 +40,8 @@ instale as dependências rodando o seguinte comando:
 npm install
 ```
 
-## Configuração local
+Local files config
+=================
 É necessário ter o mysql instalado e configurado.
 
 Renomeie o arquivo `.env.example` para `.env`
