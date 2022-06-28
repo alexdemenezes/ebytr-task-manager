@@ -655,6 +655,12 @@ Exemplo:
 
 
 ### tests
+para rodar todos os testes.
+
+comando:
+```
+npm test
+```
 
 ### Users tests
 para rodar todos os testes apenas relacionados à usuários.
