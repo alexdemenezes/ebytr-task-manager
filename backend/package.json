@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:user:only": "mocha  ./src/tests/users/$NAME.spec.js -t 10000 --exit",
-    "test:task:only": "mocha  ./src/tests/tasks/$NAME.spec.js -t 10000 --exit",
-    "test:users": " mocha ./src/tests/users/*.spec.js -t 10000 --exit",
-    "test:tasks": " mocha ./src/tests/tasks/*.spec.js -t 10000 --exit",
+    "test": "mocha ./src/tests/**/*.spec.js -t 10000 --exit",
+    "test:users": "mocha  ./src/tests/users/$NAME.spec.js -t 10000 --exit",
+    "test:tasks": "mocha  ./src/tests/tasks/$NAME.spec.js -t 10000 --exit",
+    "test:users:only": " mocha ./src/tests/users/*.spec.js -t 10000 --exit",
+    "test:tasks:only": " mocha ./src/tests/tasks/*.spec.js -t 10000 --exit",
     "test:coverage": "nyc npm run test",
     "start": "node ./src/server.js"
   },
