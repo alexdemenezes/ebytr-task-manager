@@ -149,7 +149,7 @@ describe('POST /api/login', () => {
         .post('/api/login')
         .send(wrongCredentials);
 
-      expect(chaiHttpResponse.status).to.be.equal(400);
+      expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.have.property('message');
       expect(chaiHttpResponse.body.message).to.deep.equal('Incorrect email or password');
     });
