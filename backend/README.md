@@ -11,8 +11,8 @@ Tabela de conteúdos
    * [Como usar](#usage)
    * [Endpoints](#endpoints)
       * [users](#users)
-        * [solicitar dados básicos do usuário](#read-info)
         * [registrar](#create-account)
+        * [solicitar dados básicos do usuário](#read-info)
         * [login](#login)
         * [atualizar dados](#update-info)
         * [excluir conta](#delete-account)
@@ -21,8 +21,11 @@ Tabela de conteúdos
         * [ler](#read-task)
         * [atualizar](#update-task)
         * [deletar](#delete-task)
-   * [Tests](#testes)
-   * [Tecnologias](#tecnologias)
+   * [Tests](#tests)
+      * [users](#users-tests)
+      * [tasks](#tasks-tests)
+      * [cobertura total](#coverage)
+   * [Tecnologias](#technologies)
 <!--te-->
 
 Installation
@@ -392,6 +395,352 @@ Exemplo:
   "message": "internal error"
 }
 ```
+
+
+## Tasks
+
+### Create task
+
+### POST `/api/tasks`
+Endpoint responsável por criar tarefas.
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+Obrigatório:
+
+title: título da tarefa
+
+status: "pendente" | "em andamento" | "pronto"
+
+Opcional:
+
+description: descrição da tarefa
+
+Exemplo: 
+```
+{
+  title: "finalizar projeto pessoal",
+  description: "finalizar o projeto task manager antes do dia 05 para poder viajar!"
+  status: "pendente"
+}
+```
+#### Retornos: 
+##### Criada! 201
+tarefa registrada com sucesso.
+
+Exemplo:
+```
+{
+   id: 1
+   title: "finalizar projeto pessoal"
+   description: "finalizar o projeto task manager antes do dia 05 para poder viajar!"
+   status: "pendente"
+   userId: 1,
+};
+```
+##### Campos não preenchidos! 400
+Titulo não preenchido
+
+Exemplo:
+```
+{ "message": "title field must be filled" }
+```
+##### Campos não preenchidos! 400
+status não preenchido
+
+Exemplo:
+```
+{ "message": "status field must be filled" }
+```
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
+
+### Read task
+
+### GET `/api/tasks`
+Endpoint responsável por retornar todas as tarefas do usuário.
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+Nenhum
+#### Respostas: 
+##### OK! 200
+retorna todas as tarefas
+
+Exemplo:
+```
+[
+  {
+    "id": 1,
+    "title": "finalizar projeto Udemy",
+    "description": "",
+    "status": "pendente",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "title": "estudar JS",
+    "description": "estudar javascript este final de semana",
+    "status": "pendente",
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "title": "correr domingo",
+    "description": "correr 10 km no parque do ibira",
+    "status": "pendente",
+    "userId": 1
+  }
+]
+
+```
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
+
+### GET `/api/tasks/:id`
+Endpoint responsável por retornar uma tarefa específica
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+id: espera receber o id do usuário pelo endpoint.
+
+Exemplo:
+
+`/api/tasks/1`
+#### Retornos:
+##### OK! 200
+quando encontrar a tarefa
+
+Exemplo:
+```
+{
+  "id": 1,
+  "title": "finalizar projeto Udemy",
+  "description": "",
+  "status": "pendente",
+  "userId": 1
+}
+```
+##### Tarefa Não encontrada! 404
+
+Exemplo:
+```
+{
+  "message": "task not found"
+}
+```
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
+
+### Update task
+
+###  POST `/api/tasks/update`
+Endpoint responsável por atualizar uma tarefa.
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+O endpoint espera receber os seguintes dados no corpo da requisição:
+
+id: id da tarefa
+
+title: o título 
+
+description: a descrição
+
+status: o status
+
+Exemplo: 
+```
+{
+    "id": 1,
+    "title": "finalizar projeto Udemy até domingo",
+    "description": "",
+    "status": "em andamento"
+}
+```
+#### Retornos:
+##### OK! 200
+tarefa atualizada com sucesso.
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
+
+### Delete task
+
+### DELETE `/api/task/:id`
+Endpoint responsável por apagar uma tarefa.
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+
+id: espera receber o id do usuário pelo endpoint.
+
+Exemplo:
+
+`/api/tasks/1`
+#### Respostas:
+##### OK! 200
+tarefa apagada com sucesso.
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
+
+
+### tests
+para rodar todos os testes.
+
+comando:
+```
+npm test
+```
+
+### Users tests
+para rodar todos os testes apenas relacionados à usuários.
+
+comando:
+```
+npm run test:users:only
+```
+
+para rodar apenas um test relacionado à usuários.
+
+comando:
+```
+NAME={nome do teste} npm run test:users
+```
+
+Exemplo: 
+```
+NAME=delete npm run test:users
+```
+
+### Tasks tests
+para rodar todos os testes apenas relacionados à tarefas.
+
+comando:
+```
+npm run test:tasks:only
+```
+
+para rodar apenas um test relacionado à tarefas.
+
+comando:
+```
+NAME={nome do teste} npm run test:tasks
+```
+
+Exemplo: 
+```
+NAME=create npm run test:tasks
+```
+
+### Coverage
+para ver a porcentagem de cobertura dos testes na aplicação:
+
+comando: 
+```
+npm run test:coverage
+```
+
+*Obs: rode todos esses comando dentro do diretório `backend`.
+
+
+### Technologies
+
+- Node
+- Mysql
+- Express
+- Sequelize
+- Email-validator
+- Bcrypt.js
+- Jsonwebtoken
+- Mocha
+- Chai
+- Sinon
+- Eslint / airbnb
+- NYC
+- Cors
+
+Arquitetura utilizada:
+
+ MSC e POO:
+ - model
+ - service
+ - controller
+ 
+ 
+ 
+
+
+
 
 
 

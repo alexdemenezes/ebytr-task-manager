@@ -81,7 +81,7 @@ describe('GET /api/tasks/:id', () => {
         .set('authorization', token);
 
       expect(chaiHttpResponse.status).to.be.equal(404);
-      expect(chaiHttpResponse.body).to.deep.equal({ message: 'user not found' });
+      expect(chaiHttpResponse.body).to.deep.equal({ message: 'task not found' });
     });
   });
 

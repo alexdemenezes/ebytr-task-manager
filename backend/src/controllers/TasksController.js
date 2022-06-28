@@ -30,7 +30,7 @@ class TasksController {
       if (task) {
         return res.status(200).json(task);
       }
-      return res.status(404).json({ message: 'user not found' });
+      return res.status(404).json({ message: 'task not found' });
     } catch (e) {
       return res.status(500).json({ message: 'internal error' });
     }
