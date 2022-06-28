@@ -11,8 +11,8 @@ Tabela de conteúdos
    * [Como usar](#usage)
    * [Endpoints](#endpoints)
       * [users](#users)
-        * [solicitar dados básicos do usuário](#read-info)
         * [registrar](#create-account)
+        * [solicitar dados básicos do usuário](#read-info)
         * [login](#login)
         * [atualizar dados](#update-info)
         * [excluir conta](#delete-account)
@@ -394,8 +394,77 @@ Exemplo:
 ```
 
 
+## Tasks
 
+### Create task
 
+### POST `/api/tasks`
+Endpoint responsável por criar tarefas.
+#### Autenticação:
+O endpoint espera receber o token de autenticação no header em uma chave chamada `authorization`.
+
+Exemplo: 
+```
+{
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldi5lbWFpbHRlc3Q0MDRAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY1NjQyMjkwOSwiZXhwIjoxNjU2NDMwMTA5fQ.V07-pNP1KGgoaj6Bp0QoVXsge98KkunrMqjRVGgduBc
+}
+```
+#### Parâmetros:
+Obrigatório:
+
+title: título da tarefa
+
+status: "pendente" | "em andamento" | "pronto"
+
+Opcional:
+
+description: descrição da tarefa
+
+Exemplo: 
+```
+{
+  title: "finalizar projeto pessoal",
+  description: "finalizar o projeto task manager antes do dia 05 para poder viajar!"
+  status: "pendente"
+}
+```
+#### Retornos: 
+##### Criada! 201
+tarefa registrada com sucesso.
+
+Exemplo:
+```
+{
+   id: 1
+   title: "finalizar projeto pessoal"
+   description: "finalizar o projeto task manager antes do dia 05 para poder viajar!"
+   status: "pendente"
+   userId: 1,
+};
+```
+##### Campos não preenchidos! 400
+Titulo não preenchido
+
+Exemplo:
+```
+{ "message": "title field must be filled" }
+```
+##### Campos não preenchidos! 400
+status não preenchido
+
+Exemplo:
+```
+{ "message": "status field must be filled" }
+```
+##### Erro interno no servidor! 500
+Caso o endpoint apresente algum problema inesperado.
+
+Exemplo:
+```
+{
+  "message": "internal error"
+}
+```
 
 
 
