@@ -166,7 +166,7 @@ Exemplo:
 ```
 {
   "id": 1,
-  "adriano234",
+  "username":"adriano234",
   "email": "adriano234@gmail.com"
 }
 ```
